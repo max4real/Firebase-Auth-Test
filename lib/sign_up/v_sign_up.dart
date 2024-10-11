@@ -1,4 +1,3 @@
-import 'package:firebase_auth_test/home/v_home_page.dart';
 import 'package:firebase_auth_test/sign_up/c_sign_up.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -155,9 +154,10 @@ class SignUpPage extends StatelessWidget {
                                   );
                                 },
                               ),
-                              const SizedBox(height: 5),
+                              const SizedBox(height: 20),
                               ElevatedButton(
                                 onPressed: () {
+                                  controller.checkAllField();
                                 },
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: background,

@@ -125,10 +125,10 @@ class LoginPage extends StatelessWidget {
                                   );
                                 },
                               ),
-                              const SizedBox(height: 10),
+                              const SizedBox(height: 20),
                               ElevatedButton(
                                 onPressed: () {
-                                   controller.varfiyEmail();
+                                  controller.checkAllField();
                                 },
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: background,
@@ -143,20 +143,14 @@ class LoginPage extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              const SizedBox(height: 5),
-                              ElevatedButton(
+                              TextButton(
                                 onPressed: () {
                                   Get.to(() => const SignUpPage());
                                 },
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.transparent,
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 50, vertical: 10),
-                                ),
                                 child: const Text(
                                   "SIGN UP",
                                   style: TextStyle(
-                                    color: Colors.white,
+                                    color: Colors.black,
                                     fontSize: 16,
                                   ),
                                 ),

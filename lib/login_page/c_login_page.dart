@@ -1,9 +1,5 @@
-import 'dart:ui';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_auth_test/home/v_home_page.dart';
-import 'package:firebase_auth_test/sign_up/v_sign_up.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -15,7 +11,7 @@ class LoginPageController extends GetxController {
   TextEditingController txtPassword = TextEditingController(text: "");
   ValueNotifier<bool> xObscured = ValueNotifier(true);
 
-  void varfiyEmail() async {
+  void checkAllField() async {
     if (txtEmail.text.isNotEmpty && txtPassword.text.isNotEmpty) {
       // signIn();
       signInWithEmail(txtEmail.text, txtPassword.text);
@@ -31,7 +27,7 @@ class LoginPageController extends GetxController {
           .signInWithEmailAndPassword(email: email, password: password);
       //if all goes well, go to home page.
       Get.offAll(
-          () => HomePage(state: dataController.loginState.value.toString()));
+          () => HomePage(state: dataController.loginState.value.toString(),message: "Successfully Login",));
     } catch (e) {
       if (e is FirebaseAuthException) {
         // print("e code --------------------" + e.code);
