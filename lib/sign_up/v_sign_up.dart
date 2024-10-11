@@ -1,6 +1,5 @@
 import 'package:firebase_auth_test/home/v_home_page.dart';
-import 'package:firebase_auth_test/login_page/c_login_page.dart';
-import 'package:firebase_auth_test/sign_up/v_sign_up.dart';
+import 'package:firebase_auth_test/sign_up/c_sign_up.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
@@ -8,12 +7,12 @@ import 'package:iconsax/iconsax.dart';
 import '../_services/c_data_controller.dart';
 import '../_services/c_theme_controller.dart';
 
-class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+class SignUpPage extends StatelessWidget {
+  const SignUpPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    LoginPageController controller = Get.put(LoginPageController());
+    SignUpController controller = Get.put(SignUpController());
     return Scaffold(
       resizeToAvoidBottomInset: true,
       body: SafeArea(
@@ -50,6 +49,36 @@ class LoginPage extends StatelessWidget {
                                 "LOGIN",
                                 style:
                                     TextStyle(fontSize: 20, color: background),
+                              ),
+                              TextField(
+                                controller: controller.txtName,
+                                keyboardType: TextInputType.name,
+                                maxLines: 1,
+                                onTapOutside: (event) {
+                                  dismissKeyboard();
+                                },
+                                cursorWidth: 1,
+                                cursorColor: secondary,
+                                cursorHeight: 15,
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 14,
+                                ),
+                                decoration: InputDecoration(
+                                    border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(10.0),
+                                      borderSide: BorderSide.none,
+                                    ),
+                                    filled: true,
+                                    fillColor: onBackground,
+                                    prefixIcon: const Icon(
+                                        Iconsax.profile_2user,
+                                        size: 20,
+                                        color: Colors.white),
+                                    hintText: "Name"),
+                              ),
+                              const SizedBox(
+                                height: 10,
                               ),
                               TextField(
                                 controller: controller.txtEmail,
@@ -126,31 +155,13 @@ class LoginPage extends StatelessWidget {
                                   );
                                 },
                               ),
-                              const SizedBox(height: 10),
+                              const SizedBox(height: 5),
                               ElevatedButton(
                                 onPressed: () {
                                   Get.to(() => const HomePage());
                                 },
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: background,
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 50, vertical: 10),
-                                ),
-                                child: const Text(
-                                  "LOGIN",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 16,
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(height: 5),
-                              ElevatedButton(
-                                onPressed: () {
-                                  Get.to(() => const SignUpPage());
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.transparent,
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 50, vertical: 10),
                                 ),
