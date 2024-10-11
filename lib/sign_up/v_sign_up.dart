@@ -158,7 +158,6 @@ class SignUpPage extends StatelessWidget {
                               const SizedBox(height: 5),
                               ElevatedButton(
                                 onPressed: () {
-                                  Get.to(() => const HomePage());
                                 },
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: background,

@@ -1,4 +1,3 @@
-import 'package:firebase_auth_test/home/v_home_page.dart';
 import 'package:firebase_auth_test/login_page/c_login_page.dart';
 import 'package:firebase_auth_test/sign_up/v_sign_up.dart';
 import 'package:flutter/material.dart';
@@ -129,7 +128,7 @@ class LoginPage extends StatelessWidget {
                               const SizedBox(height: 10),
                               ElevatedButton(
                                 onPressed: () {
-                                  Get.to(() => const HomePage());
+                                   controller.varfiyEmail();
                                 },
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: background,

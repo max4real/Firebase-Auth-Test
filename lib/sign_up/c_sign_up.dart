@@ -9,4 +9,6 @@ class SignUpController extends GetxController {
   TextEditingController txtEmail = TextEditingController(text: "");
   TextEditingController txtPassword = TextEditingController(text: "");
   ValueNotifier<bool> xObscured = ValueNotifier(true);
+
+   
 }
