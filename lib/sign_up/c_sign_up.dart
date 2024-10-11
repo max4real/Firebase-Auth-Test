@@ -16,23 +16,30 @@ class SignUpController extends GetxController {
     if (txtEmail.text.isNotEmpty &&
         txtPassword.text.isNotEmpty &&
         txtName.text.isNotEmpty) {
-      signUpWithEmailandPassword(txtEmail.text, txtPassword.text);
+      signUpWithEmailandPassword(txtEmail.text, txtPassword.text, txtName.text);
     } else {
       maxDialog("Enter all field", false);
     }
   }
 
-  Future<void> signUpWithEmailandPassword(String email, String password) async {
+  Future<void> signUpWithEmailandPassword(
+      String email, String password, String name) async {
     try {
-      // Attempt to sign up
-      await FirebaseAuth.instance
+      UserCredential userCredential = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password);
 
-      //if all goes well, go to home page.
-      Get.offAll(() => HomePage(
-            state: dataController.loginState.value.toString(),
-            message: 'Successfully Created',
-          ));
+      User? user = userCredential.user;
+      if (user != null) {
+        await user.updateDisplayName(txtName.text);
+        await user.reload();
+        user = FirebaseAuth.instance.currentUser;
+      }
+      Get.offAll(
+        () => HomePage(
+          state: dataController.loginState.value.toString(),
+          message: 'Successfully Created - ${user!.displayName}',
+        ),
+      );
     } catch (e) {
       if (e is FirebaseAuthException) {
         switch (e.code) {

@@ -13,7 +13,6 @@ class LoginPageController extends GetxController {
 
   void checkAllField() async {
     if (txtEmail.text.isNotEmpty && txtPassword.text.isNotEmpty) {
-      // signIn();
       signInWithEmail(txtEmail.text, txtPassword.text);
     } else {
       maxDialog("Enter all field", false);
@@ -22,15 +21,20 @@ class LoginPageController extends GetxController {
 
   Future<void> signInWithEmail(String email, String password) async {
     try {
-      // Attempt to sign in
       await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
-      //if all goes well, go to home page.
+
+      //to get the current user name
+      User? user = FirebaseAuth.instance.currentUser;
+
       Get.offAll(
-          () => HomePage(state: dataController.loginState.value.toString(),message: "Successfully Login",));
+        () => HomePage(
+          state: dataController.loginState.value.toString(),
+          message: "Successfully Login ${user!.displayName}",
+        ),
+      );
     } catch (e) {
       if (e is FirebaseAuthException) {
-        // print("e code --------------------" + e.code);
         switch (e.code) {
           case 'invalid-credential':
             maxDialog("Invalid credentials. Try again.", false);
@@ -44,58 +48,4 @@ class LoginPageController extends GetxController {
       }
     }
   }
-
-  // void signIn() async {
-  //   if (txtEmail.text.isNotEmpty && txtPassword.text.isNotEmpty) {
-  //     try {
-  //       await FirebaseAuth.instance.signInWithEmailAndPassword(
-  //           email: txtEmail.text, password: txtPassword.text);
-  //       Get.to(
-  //           () => HomePage(state: dataController.loginState.value.toString()));
-  //     } on FirebaseAuthException catch (e) {
-  //       print(e);
-  //     }
-  //   }
-  // }
-
-  // Future<bool> checkIfEmailExists(String email) async {
-  //   try {
-  //     // Fetch sign-in methods for the given email
-  //     final signInMethods =
-  //         await FirebaseAuth.instance.fetchSignInMethodsForEmail(email);
-
-  //     // Check if there are any sign-in methods associated with the email
-  //     return signInMethods.isNotEmpty;
-  //   } catch (e) {
-  //     print("Error: $e");
-  //     return false; // Handle error accordingly
-  //   }
-  // }
-
-  // Future<void> signInWithEmail(String email, String password) async {
-  //   try {
-  //     // Attempt to sign in
-  //     await FirebaseAuth.instance
-  //         .signInWithEmailAndPassword(email: email, password: password);
-
-  //     print("Successfully signed in.");
-  //   } catch (e) {
-  //     if (e is FirebaseAuthException) {
-  //       switch (e.code) {
-  //         case 'user-not-found':
-  //           print("No account found for that email.");
-  //           // Here you might prompt the user to create a new account
-  //           break;
-  //         case 'wrong-password':
-  //           print("Invalid credentials. Try again.");
-  //           break;
-  //         default:
-  //           print("Error: ${e.message}");
-  //           break;
-  //       }
-  //     } else {
-  //       print("Error: $e");
-  //     }
-  //   }
-  // }
 }

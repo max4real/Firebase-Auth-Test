@@ -12,6 +12,7 @@ class SignUpPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SignUpController controller = Get.put(SignUpController());
+    DataController dataController = Get.find();
     return Scaffold(
       resizeToAvoidBottomInset: true,
       body: SafeArea(
@@ -32,7 +33,7 @@ class SignUpPage extends StatelessWidget {
                     children: [
                       Container(
                         width: double.infinity,
-                        height: 300,
+                        height: 350,
                         decoration: BoxDecoration(
                             color: secondary,
                             borderRadius: BorderRadius.circular(40)),
@@ -45,9 +46,14 @@ class SignUpPage extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               Text(
-                                "LOGIN",
+                                "SIGN UP",
                                 style:
                                     TextStyle(fontSize: 20, color: background),
+                              ),
+                              Text(
+                                dataController.loginState.value.toString(),
+                                style:
+                                    TextStyle(fontSize: 10, color: background),
                               ),
                               TextField(
                                 controller: controller.txtName,

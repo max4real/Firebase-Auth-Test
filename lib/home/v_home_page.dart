@@ -1,4 +1,6 @@
+import 'package:firebase_auth_test/home/c_home_page.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class HomePage extends StatelessWidget {
   final String state;
@@ -7,6 +9,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    HomeController controller = Get.put(HomeController());
     return Scaffold(
       backgroundColor: Colors.black,
       body: Center(
@@ -19,7 +22,14 @@ class HomePage extends StatelessWidget {
             ),
             Text(
               message,
-              style: TextStyle(color: Colors.greenAccent,fontSize: 16),
+              style: TextStyle(color: Colors.greenAccent, fontSize: 16),
+            ),
+            const SizedBox(height: 30),
+            ElevatedButton(
+              onPressed: () {
+                controller.signOut();
+              },
+              child: const Text("LOGOUT"),
             )
           ],
         ),

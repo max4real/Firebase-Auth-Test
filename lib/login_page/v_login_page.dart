@@ -13,6 +13,7 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     LoginPageController controller = Get.put(LoginPageController());
+    DataController dataController = Get.find();
     return Scaffold(
       resizeToAvoidBottomInset: true,
       body: SafeArea(
@@ -49,6 +50,11 @@ class LoginPage extends StatelessWidget {
                                 "LOGIN",
                                 style:
                                     TextStyle(fontSize: 20, color: background),
+                              ),
+                              Text(
+                                dataController.loginState.value.toString(),
+                                style:
+                                    TextStyle(fontSize: 10, color: background),
                               ),
                               TextField(
                                 controller: controller.txtEmail,
