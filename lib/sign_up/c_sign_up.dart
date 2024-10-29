@@ -35,10 +35,7 @@ class SignUpController extends GetxController {
         user = FirebaseAuth.instance.currentUser;
       }
       Get.offAll(
-        () => HomePage(
-          state: dataController.loginState.value.toString(),
-          message: 'Successfully Created - ${user!.displayName}',
-        ),
+        () => const HomePage(),
       );
     } catch (e) {
       if (e is FirebaseAuthException) {

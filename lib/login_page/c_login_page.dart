@@ -25,13 +25,8 @@ class LoginPageController extends GetxController {
           .signInWithEmailAndPassword(email: email, password: password);
 
       //to get the current user name
-      User? user = FirebaseAuth.instance.currentUser;
-
       Get.offAll(
-        () => HomePage(
-          state: dataController.loginState.value.toString(),
-          message: "Successfully Login ${user!.displayName}",
-        ),
+        () => const HomePage(),
       );
     } catch (e) {
       if (e is FirebaseAuthException) {

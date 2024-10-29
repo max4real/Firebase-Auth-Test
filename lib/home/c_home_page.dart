@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_auth_test/login_page/v_login_page.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
@@ -16,5 +17,12 @@ class HomeController extends GetxController {
     } catch (e) {
       print("Error signing out: $e");
     }
+  }
+  ValueNotifier<String> name = ValueNotifier('');
+
+  void getAccName() {
+    User? user = FirebaseAuth.instance.currentUser;
+
+    name.value = user!.email!;
   }
 }

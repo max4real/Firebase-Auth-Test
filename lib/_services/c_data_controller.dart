@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -12,9 +15,18 @@ enum ApplicationLoginStae {
   loggedIn,
 }
 
+class DataModel {
+  String name;
+  String data;
+  DataModel({required this.name, required this.data});
+}
+
 class DataController extends GetxController {
   ValueNotifier<ApplicationLoginStae> loginState =
       ValueNotifier(ApplicationLoginStae.loggedOut);
+
+  ValueNotifier<List<DataModel>> dataModelList = ValueNotifier([]);
+  StreamSubscription<QuerySnapshot>? dataSubcription;
   String email = '';
   @override
   void onInit() {
@@ -29,18 +41,19 @@ class DataController extends GetxController {
     FirebaseAuth.instance.userChanges().listen((user) {
       if (user != null) {
         loginState.value = ApplicationLoginStae.loggedIn;
+
+        // dataSubcription = FirebaseFirestore.instance.collection('collectionPath').snapshots().listen(onData)
       } else {
         loginState.value = ApplicationLoginStae.loggedOut;
       }
     });
   }
-
-
 }
 
 void dismissKeyboard() {
   FocusManager.instance.primaryFocus?.unfocus();
 }
+
 void maxSnackBar(BuildContext context, String message) {
   ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
 }
